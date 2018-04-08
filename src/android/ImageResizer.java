@@ -83,12 +83,12 @@ public class ImageResizer extends CordovaPlugin {
             BitmapFactory.decodeStream(FileHelper.getInputStreamFromUriString(uriString, cordova), null, options);
 
             //calc aspect ratio
-            int[] retval = calculateAspectRatio(options.outWidth, options.outHeight);
+            //int[] retval = calculateAspectRatio(options.outWidth, options.outHeight);
 
             options.inJustDecodeBounds = false;
             options.inSampleSize = calculateSampleSize(options.outWidth, options.outHeight, width, height);
             Bitmap unscaledBitmap = BitmapFactory.decodeStream(FileHelper.getInputStreamFromUriString(uriString, cordova), null, options);
-            return Bitmap.createScaledBitmap(unscaledBitmap, retval[0], retval[1], true);
+            return Bitmap.createScaledBitmap(unscaledBitmap, width, height, true);
         } catch (FileNotFoundException e) {
             Log.e("Protonet", "File not found. :(");
         } catch (IOException e) {
